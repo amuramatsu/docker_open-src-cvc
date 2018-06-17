@@ -3,7 +3,7 @@ FROM debian:8-slim
 MAINTAINER MURAMATSU Atsushi <amura@tomato.sakura.ne.jp>
 
 WORKDIR /work
-COPY open-src-cvc.patch cvc_cmd.sh cc_cmd.sh entrypoint.sh /
+COPY open-src-cvc.patch cvc_cmd.pl cc_cmd.sh entrypoint.sh /
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 		gcc make libc-dev libz-dev \
 		git \

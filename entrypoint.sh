@@ -6,7 +6,7 @@ if [ x"$1" != x"" ]; then
 	cat /OSS-CVC-MOD-ARTISTIC-LIC.TXT
 	exit 0;;
     show-cvc_cmd)
-	cat /cvc_cmd.sh
+	cat /cvc_cmd.pl
 	exit 0;;
     show-cc_cmd)
 	cat /cc_cmd.sh
