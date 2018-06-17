@@ -15,6 +15,8 @@ if [ x"$1" != x"" ]; then
 	echo "show-license : display license of CVC"
 	echo "show-cvc_cmd : show example of cvc script"
 	echo "show-cc_cmd : show example of cc script for PLI"
+	echo ""
+	echo "Documents of open-src-cvc are included at /usr/share/doc/open-src-cvc"
 	exit 0;;
   esac
 fi
