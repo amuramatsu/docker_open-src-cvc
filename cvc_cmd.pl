@@ -16,7 +16,7 @@ sub modify_exec {
 	binmode($newfile);
 	print $newfile <<"__EOS__";
 #! /bin/sh
-exec docker run -u \$UID -v "\$(pwd):/work" --rm -it $IMAGE_NAME ./$filename.bin "\$\@"
+exec docker run -u \$(id -u) -v "\$(pwd):/work" --rm -it $IMAGE_NAME ./$filename.bin "\$\@"
 __EOS__
 	close $newfile;
 	chmod 0755, $filename;
