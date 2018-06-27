@@ -14,7 +14,7 @@ Working directory of this container is `/work`.
 Generally, you can use the simulate such as:
 
 ``` sh
-docker run --rm -it amura/open-src-cvc show-cvc_cmd > cvc
+docker run --rm amura/open-src-cvc show-cvc_cmd > cvc
 chmod +x cvc
 ./cvc TB.v design.v
 ```
