@@ -1,10 +1,14 @@
-FROM debian:8-slim
+FROM --platform=linux/amd64 debian:8-slim
 
 MAINTAINER MURAMATSU Atsushi <amura@tomato.sakura.ne.jp>
 
 WORKDIR /work
 COPY open-src-cvc.patch cvc_cmd.pl cc_cmd.sh entrypoint.sh /
-RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+RUN rm /etc/apt/sources.list \
+	&& echo "deb http://archive.debian.org/debian-security jessie/updates main" >> /etc/apt/sources.list.d/jessie.list \
+	&& echo "deb http://archive.debian.org/debian jessie main" >> /etc/apt/sources.list.d/jessie.list \
+	&& apt-get update && apt-get upgrade -y \
+	&& apt-get install -y --force-yes \
 		gcc make libc-dev libz-dev \
 		git \
 	&& git clone --depth 1 https://github.com/cambridgehackers/open-src-cvc \

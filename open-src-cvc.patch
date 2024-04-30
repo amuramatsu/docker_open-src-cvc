@@ -1,10 +1,23 @@
+diff --git a/src/makefile.cvc64 b/src/makefile.cvc64
+index f26a04c..da7d58c 100644
+--- a/src/makefile.cvc64
++++ b/src/makefile.cvc64
+@@ -46,7 +46,7 @@ CVCCOBJS=v_bbgen.o v_bbgen2.o v_bbgen3.o v_bbopt.o v_cvcms.o v_asmlnk.o \
+  v_aslib.o v_regasn.o v_cvcrt.o v_xprop.o fstapi.o fastlz.o lz4.o
+ 
+ # make normal optimized CVC that pipes .s gas files instead of making .s files
+-CVCCFLGS= -D$(LINUX_VERS) $(FLG32) -fno-pie -no-pie
++CVCCFLGS= -D$(LINUX_VERS) $(FLG32) -fno-pie
+ 
+ # __CVC_DEBUG__ must be turned on or the CVC debugging command line options
+ # mostly +Odebug and +show_asm won't be recognized
 diff --git a/src/v_asmlnk.c b/src/v_asmlnk.c
-index c23d8f6..7257b84 100644
+index 890b8db..66c25a8 100644
 --- a/src/v_asmlnk.c
 +++ b/src/v_asmlnk.c
 @@ -10056,9 +10056,9 @@ static void gen_mkfil_and_compile_solib(void)
   fprintf(fp, "LFLAGS = \n");
-  fprintf(fp, "CC = gcc\n");
+  fprintf(fp, "CC = " ASM_CC "\n");
  #ifdef __CVC32__
 - fprintf(fp, "CFLAGS = -no-pie -g -m32\n");
 + fprintf(fp, "CFLAGS = -g -m32\n");
@@ -18,12 +31,12 @@ index c23d8f6..7257b84 100644
   /* AIV LOOKATME - don't think flags matter here already compiled with -02 */
   /* gcc just does the linking */
  #ifdef __CVC_DEBUG__
-- sprintf(cmd, "gcc -no-pie -o %s %s %s ", __exe_name, __exe_file_name, 
-+ sprintf(cmd, "gcc -o %s %s %s ", __exe_name, __exe_file_name, 
+- sprintf(cmd, ASM_CC " -no-pie -o %s %s %s ", __exe_name, __exe_file_name, 
++ sprintf(cmd, ASM_CC " -o %s %s %s ", __exe_name, __exe_file_name, 
     __cvclib_file_name);
  #else
-- sprintf(cmd, "gcc -no-pie -O2 -o %s %s %s ", __exe_name, __exe_file_name,
-+ sprintf(cmd, "gcc -O2 -o %s %s %s ", __exe_name, __exe_file_name,
+- sprintf(cmd, ASM_CC " -no-pie -O2 -o %s %s %s ", __exe_name, __exe_file_name,
++ sprintf(cmd, ASM_CC " -O2 -o %s %s %s ", __exe_name, __exe_file_name,
    __cvclib_file_name);
  #endif
  
